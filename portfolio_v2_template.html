@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>尤芷萱的作品集</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #FAFAFA;
+    --surface: #FFFFFF;
+    --text: #1A1A1A;
+    --text-secondary: #666666;
+    --text-tertiary: #999999;
+    --accent: #FF5A5F;
+    --accent-light: #FFE8E9;
+    --border: #EEEEEE;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; transition: opacity 0.2s; }
+  a:hover { opacity: 0.75; }
+  img { max-width: 100%; display: block; }
+
+  /* ===== Navigation ===== */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(250,250,250,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 0;
+  }
+  nav .nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 32px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  nav .logo { font-weight: 700; font-size: 18px; letter-spacing: -0.02em; }
+  nav .logo span { color: var(--accent); }
+  nav .nav-links { display: flex; gap: 28px; }
+  nav .nav-links a {
+    color: var(--text-secondary); font-size: 14px; font-weight: 400;
+  }
+  nav .nav-links a:hover { color: var(--accent); opacity: 1; }
+
+  /* ===== Hero ===== */
+  .hero {
+    padding: 140px 32px 80px;
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 320px; gap: 64px; align-items: center;
+  }
+  .hero h1 {
+    font-size: 52px; font-weight: 900; line-height: 1.15;
+    letter-spacing: -0.03em; margin-bottom: 20px;
+  }
+  .hero h1 .highlight { color: var(--accent); }
+  .hero .tagline {
+    font-size: 18px; color: var(--text-secondary); font-weight: 400;
+    margin-bottom: 28px; max-width: 520px;
+  }
+  .hero .contact-info { font-size: 14px; color: var(--text-tertiary); line-height: 2.1; }
+  .hero .contact-info strong { color: var(--text); font-weight: 500; }
+  .hero .portrait {
+    width: 320px; height: 400px; border-radius: 24px; object-fit: cover;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+  }
+
+  /* ===== Sections ===== */
+  section { padding: 80px 32px; max-width: 1200px; margin: 0 auto; }
+  .section-label {
+    display: inline-block; font-size: 12px; font-weight: 500;
+    color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: 36px; font-weight: 700; letter-spacing: -0.02em;
+    margin-bottom: 48px; line-height: 1.2;
+  }
+
+  /* ===== About ===== */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .about-card {
+    background: var(--surface); border-radius: 16px; padding: 32px;
+    border: 1px solid var(--border);
+  }
+  .about-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+  .about-card ul { list-style: none; }
+  .about-card ol {
+    list-style: none; counter-reset: ability; margin: 0; padding: 0;
+  }
+  .about-card ol li {
+    counter-increment: ability;
+    padding: 12px 0; border-bottom: 1px solid var(--border);
+    font-size: 14px; color: var(--text-secondary);
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  .about-card ol li::before {
+    content: counter(ability);
+    flex: 0 0 20px; height: 20px; line-height: 20px; text-align: center;
+    background: var(--accent); color: #fff; border-radius: 50%;
+    font-size: 12px; font-weight: 600;
+  }
+  .about-card ol li:last-child { border-bottom: none; }
+  .about-card li {
+    padding: 12px 0; border-bottom: 1px solid var(--border);
+    font-size: 14px; color: var(--text-secondary);
+  }
+  .about-card li:last-child { border-bottom: none; }
+  .about-card li strong { color: var(--text); font-weight: 500; }
+
+  /* ===== Work Blocks ===== */
+  .work-block { margin-bottom: 64px; }
+  .work-block:last-child { margin-bottom: 0; }
+  .work-block-header { margin-bottom: 24px; }
+  .work-block-header h3 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+  .work-block-header p { color: var(--text-secondary); font-size: 15px; }
+
+  .stats-row {
+    display: flex; gap: 40px; flex-wrap: wrap; margin: 20px 0;
+  }
+  .stat-item .num {
+    font-size: 30px; font-weight: 900; color: var(--accent);
+    letter-spacing: -0.02em; line-height: 1;
+  }
+  .stat-item .label { font-size: 12px; color: var(--text-tertiary); margin-top: 4px; }
+
+  .img-grid {
+    display: grid; gap: 16px; margin-top: 20px;
+  }
+  .img-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+  .img-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .img-grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .img-grid.cols-6 { grid-template-columns: repeat(6, 1fr); }
+  .img-grid img {
+    width: 100%; border-radius: 12px; transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .img-grid img:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  }
+
+  .split-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: start; }
+  .media-card {
+    background: var(--surface); border-radius: 16px; padding: 20px;
+    border: 1px solid var(--border); margin-top: 16px;
+  }
+  .media-card img { border-radius: 12px; width: 100%; }
+  .media-card .caption { font-size: 13px; color: var(--text-tertiary); margin-top: 10px; }
+  .media-card .caption a { font-weight: 500; }
+
+  .platform-cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px; margin-top: 20px;
+  }
+  .platform-card {
+    background: var(--surface); border-radius: 16px; padding: 20px;
+    border: 1px solid var(--border); display: flex; align-items: center; gap: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .platform-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .platform-card img {
+    width: 56px; height: 56px; border-radius: 12px; object-fit: cover;
+  }
+  .platform-card .info h4 { font-size: 14px; font-weight: 600; }
+  .platform-card .info p { font-size: 12px; color: var(--text-tertiary); margin-top: 2px; }
+
+  .link-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--text); color: #fff; padding: 8px 16px;
+    border-radius: 100px; font-size: 13px; font-weight: 500;
+    margin-top: 12px; transition: background 0.2s;
+  }
+  .link-btn:hover { background: var(--accent); opacity: 1; }
+  .link-btn.douyin { background: #000; }
+  .link-btn.douyin:hover { background: #FE2C55; }
+
+  .callout {
+    background: var(--accent-light); border-radius: 12px; padding: 20px 24px;
+    margin: 20px 0; font-size: 14px; color: var(--text);
+  }
+  .callout ul { margin: 8px 0 0 18px; }
+  .callout li { margin: 4px 0; }
+
+  /* table-like C7 structure */
+  .event-table { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 16px; }
+  .event-row {
+    display: grid; grid-template-columns: 120px 1fr; gap: 16px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 20px 24px; align-items: center;
+  }
+  .event-row .stage { font-weight: 700; font-size: 15px; color: var(--accent); }
+  .event-row .stage small { display: block; color: var(--text-tertiary); font-weight: 400; font-size: 12px; }
+  .event-row .content { font-size: 14px; color: var(--text-secondary); }
+  .event-row .content strong { color: var(--text); }
+  .event-row .content img { border-radius: 10px; margin-top: 10px; width: 100%; }
+
+  audio { width: 100%; margin-top: 8px; }
+  video { width: 100%; border-radius: 12px; margin-top: 12px; }
+
+  /* UGC carousel */
+  .carousel-wrap { position: relative; margin-top: 16px; }
+  .carousel {
+    display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory;
+    padding-bottom: 12px; -webkit-overflow-scrolling: touch;
+  }
+  .carousel::-webkit-scrollbar { height: 6px; }
+  .carousel::-webkit-scrollbar-thumb { background: #ddd; border-radius: 3px; }
+  .carousel .slide {
+    flex: 0 0 46%; scroll-snap-align: start;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 10px; text-align: center;
+  }
+  .carousel .slide img { border-radius: 10px; width: 100%; }
+  .carousel-hint {
+    text-align: center; font-size: 13px; color: var(--text-tertiary);
+    margin-top: 6px; letter-spacing: 0.05em;
+  }
+
+  /* ===== Footer ===== */
+  footer {
+    border-top: 1px solid var(--border); padding: 40px 32px; text-align: center;
+    color: var(--text-tertiary); font-size: 13px;
+  }
+
+  /* ===== Responsive ===== */
+  @media (min-width: 769px) {
+    .split-layout .media-card img,
+    .media-card.single img { max-width: 380px; margin: 0 auto; }
+    .event-row .content > img { max-width: 380px; margin: 10px auto 0; }
+  }
+  @media (max-width: 768px) {
+    .hero { grid-template-columns: 1fr; padding: 110px 20px 32px; gap: 24px; text-align: center; }
+    .hero h1 { font-size: 32px; }
+    .hero .tagline { font-size: 15px; }
+    .hero .portrait { width: 200px; height: 250px; margin: 0 auto; }
+    section { padding: 40px 20px; }
+    .section-title { font-size: 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 24px; }
+    .split-layout { grid-template-columns: 1fr; gap: 16px; }
+    .img-grid.cols-2 { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .img-grid.cols-3 { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .img-grid.cols-4 { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .img-grid.cols-6 { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .event-row { grid-template-columns: 1fr; gap: 8px; padding: 16px; }
+    nav { padding: 12px 16px; }
+    nav .nav-inner { flex-direction: column; gap: 8px; padding: 0; }
+    nav .nav-links {
+      display: flex; gap: 16px; flex-wrap: wrap;
+      justify-content: center; font-size: 13px;
+    }
+    nav .logo { font-size: 16px; }
+    .stats-row { gap: 18px; flex-wrap: wrap; justify-content: flex-start; }
+    .stat-item .num { font-size: 22px; }
+    .stat-item .label { font-size: 11px; }
+    .carousel .slide { flex: 0 0 78%; }
+  }
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 28px; }
+    .stats-row { gap: 14px; }
+    .stat-item .num { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">芷萱<span>.</span></div>
+    <div class="nav-links">
+      <a href="#about">关于我</a>
+      <a href="#newmedia">新媒体作品</a>
+      <a href="#aigc">AIGC作品</a>
+      <a href="#events">活动策划</a>
+      <a href="#gallery">手绘&摄影</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div>
+    <h1>hi，我叫<span class="highlight">尤芷萱</span></h1>
+    <p class="tagline">小红书官方认证创意玩梗类博主，擅长年轻化趣味性的内容创作与传播。</p>
+    <div class="contact-info">
+      <p><strong>学历：</strong>浙江传媒学院新闻与传播专硕（28届）</p>
+      <p><strong>求职意向：</strong>品牌传播 / 市场营销</p>
+      <p><strong>电话/微信：</strong>18158695544 ｜ <strong>邮箱：</strong>18158695544@163.com</p>
+    </div>
+  </div>
+  <img class="portrait" src="{{IMG:portrait}}" alt="尤芷萱">
+</header>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <span class="section-label">01 / ABOUT</span>
+  <h2 class="section-title">关于我</h2>
+  <div class="about-grid">
+    <div class="about-card">
+      <h3>实习经历</h3>
+      <ul>
+        <li><strong>字节跳动</strong> ｜ 品牌内容与活动运营 ｜ 2026.06 - 2026.10</li>
+        <li><strong>瑞幸咖啡</strong> ｜ 品牌运营 ｜ 2026.02 - 2026.06</li>
+        <li><strong>婚礼纪</strong> ｜ 产品增长 ｜ 2025.05 - 2026.08</li>
+      </ul>
+    </div>
+    <div class="about-card">
+      <h3>核心能力</h3>
+      <ol>
+        <li>全平台创意内容策划与传播</li>
+        <li>品牌线下活动策划与执行</li>
+        <li>达人运营与商业化变现</li>
+        <li>内容&amp;直播流量投放与数据分析</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEW MEDIA ============ -->
+<section id="newmedia">
+  <span class="section-label">02 / NEW MEDIA</span>
+  <h2 class="section-title">新媒体账号作品</h2>
+
+  <!-- 暴躁小鲸 -->
+  <div class="work-block">
+    <div class="work-block-header">
+      <h3>个人 IP 账号：<a href="https://xhslink.cn/o/1jXT92UjYpM" target="_blank">暴躁小鲸</a></h3>
+      <p>精准洞察当代年轻人痛点，定位大学生发疯文学，以搞笑玩梗形式记录大学 &amp; 职场生活</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat-item"><div class="num">4.3W</div><div class="label">粉丝</div></div>
+      <div class="stat-item"><div class="num">63.2W</div><div class="label">赞藏</div></div>
+      <div class="stat-item"><div class="num">188</div><div class="label">发布笔记</div></div>
+      <div class="stat-item"><div class="num">20+</div><div class="label">万赞爆款</div></div>
+    </div>
+    <div class="split-layout">
+      <div class="media-card">
+        <img src="{{IMG:bosswhale_account}}" alt="暴躁小鲸账号主页">
+        <div class="caption">账号主页</div>
+        <a class="link-btn" href="https://xhslink.cn/o/1jXT92UjYpM" target="_blank">前往小红书账号 →</a>
+      </div>
+      <div>
+        <div class="media-card">
+          <p style="font-size:14px;color:var(--text-secondary);"><strong style="color:var(--text);">代表作：</strong><a href="https://xhslink.cn/o/APU3eiNcmTW" target="_blank">《2023大学牲年度报告》</a></p>
+          <ul style="font-size:13px;color:var(--text-secondary);margin:10px 0 0 18px;">
+            <li>总互动 <strong style="color:var(--accent);">4.2W</strong>，总曝光突破 <strong style="color:var(--accent);">400W</strong></li>
+            <li>登上当月小红书热搜榜 <strong>TOP2</strong></li>
+            <li>作为小红书年度 SS 级活动「2025怪不一样」优质范例笔记，<strong>展示在小红书官方账号「人间观察薯」</strong>中</li>
+          </ul>
+        </div>
+        <div class="media-card">
+          <p style="font-size:14px;color:var(--text-secondary);"><strong style="color:var(--text);">商业化运营：</strong>主要通过平台接广实现商业变现</p>
+          <ul style="font-size:13px;color:var(--text-secondary);margin:10px 0 0 18px;">
+            <li>累积收到合作邀约 <strong style="color:var(--accent);">2000+</strong></li>
+            <li>合作品牌 <strong style="color:var(--accent);">80+</strong>，沉淀品牌 PR 资源 <strong style="color:var(--accent);">500+</strong></li>
+            <li>商业变现突破 <strong style="color:var(--accent);">16W</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="img-grid cols-2">
+      <div class="media-card"><img src="{{IMG:bosswhale_work1}}" alt="代表作截图1"></div>
+      <div class="media-card"><img src="{{IMG:bosswhale_work2}}" alt="代表作截图2"></div>
+      <div class="media-card"><img src="{{IMG:bosswhale_work3}}" alt="代表作截图3"></div>
+      <div class="media-card"><img src="{{IMG:bosswhale_work4}}" alt="代表作截图4"></div>
+      <div class="media-card"><img src="{{IMG:bosswhale_money}}" alt="商业化运营数据"></div>
+    </div>
+  </div>
+
+  <!-- 字节跳动雇主品牌 -->
+  <div class="work-block">
+    <div class="work-block-header">
+      <h3>「字节跳动雇主品牌」全平台账号运营</h3>
+      <p>字节跳动招聘 全平台矩阵：小红书 · 抖音 · B站</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat-item"><div class="num">287.3W</div><div class="label">全平台粉丝</div></div>
+      <div class="stat-item"><div class="num">50+</div><div class="label">发表内容</div></div>
+      <div class="stat-item"><div class="num">8000W</div><div class="label">全平台曝光</div></div>
+      <div class="stat-item"><div class="num">18.6W</div><div class="label">涨粉</div></div>
+      <div class="stat-item"><div class="num">+35%</div><div class="label">粉丝增长率提升</div></div>
+    </div>
+    <div class="platform-cards">
+      <div class="platform-card">
+        <img src="{{IMG:bytedance_avatar1}}" alt="字节跳动招聘">
+        <div class="info"><h4>字节跳动招聘</h4><p>小红书 · 粉丝 175W</p></div>
+      </div>
+      <div class="platform-card">
+        <img src="{{IMG:bytedance_avatar2}}" alt="字节跳动招聘">
+        <div class="info"><h4><a href="https://xhslink.cn/o/9LBrs5TH2ux" target="_blank">字节跳动招聘</a></h4><p>小红书 · 粉丝 11.5W</p></div>
+      </div>
+      <div class="platform-card">
+        <img src="{{IMG:bytedance_avatar3}}" alt="字节君">
+        <div class="info"><h4><a href="https://v.douyin.com/F2tgOrZybjA/" target="_blank">字节君</a></h4><p>抖音 · 粉丝 96.3W</p></div>
+      </div>
+      <div class="platform-card">
+        <img src="{{IMG:bytedance_avatar4}}" alt="字节跳动招聘">
+        <div class="info"><h4><a href="https://b23.tv/u0XKp5e" target="_blank">字节跳动招聘</a></h4><p>B站 · 粉丝 4.5W</p></div>
+      </div>
+    </div>
+    <div class="split-layout">
+      <div>
+        <div class="media-card">
+          <p style="font-size:14px;color:var(--text-secondary);"><strong style="color:var(--text);">网络热点：</strong><a href="https://xhslink.cn/o/86dIeDMqM3l" target="_blank">当我用 R&amp;B 的方式打开字节27届校招…</a></p>
+          <p style="font-size:13px;color:var(--text-tertiary);margin-top:4px;">全网播放 20W，互动 2500+</p>
+          <img src="{{IMG:bytedance_rb}}" alt="R&B校招">
+        </div>
+        <div class="media-card">
+          <p style="font-size:14px;color:var(--text-secondary);"><strong style="color:var(--text);">职场洞察：</strong><a href="https://xhslink.cn/o/7R7SP341Xxr" target="_blank">在字节上班，解锁 AI 的 100 种玩法！</a></p>
+          <img src="{{IMG:bytedance_ai}}" alt="AI玩法">
+        </div>
+        <div class="media-card">
+          <p style="font-size:14px;color:var(--text-secondary);"><strong style="color:var(--text);">2027校招系列栏目：</strong><a href="https://www.xiaohongshu.com/collection/item/6a970d5d0a7d000000000001?xhsshare=CopyLink&amp;appuid=620fbc2e000000001000d310&amp;apptime=1789819237&amp;share_id=6a0199547670496aaf33a5b72cb6770d" target="_blank">一次看透一个岗</a></p>
+          <img src="{{IMG:bytedance_job}}" alt="一次看透一个岗">
+        </div>
+      </div>
+      <div class="media-card">
+        <p style="font-size:14px;color:var(--text-secondary);"><strong style="color:var(--text);">视频代表作：</strong>校招 Q&amp;A</p>
+        <video controls preload="metadata" src="campus_recruit.mp4"></video>
+      </div>
+    </div>
+  </div>
+
+  <!-- 瑞幸咖啡 -->
+  <div class="work-block">
+    <div class="work-block-header">
+      <h3>「瑞幸咖啡雇主品牌」小红书矩阵账号</h3>
+      <p>通过品牌内容传播，传递年轻时尚的雇主形象，吸引更多人加入瑞幸</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat-item"><div class="num">30+</div><div class="label">产出内容</div></div>
+      <div class="stat-item"><div class="num">2500+</div><div class="label">粉丝增长</div></div>
+    </div>
+    <div class="img-grid cols-2">
+      <div class="media-card"><img src="{{IMG:luckin_account1}}" alt="瑞幸账号1"><div class="caption">雇主品牌小红书账号</div></div>
+      <div class="media-card"><img src="{{IMG:luckin_account2}}" alt="瑞幸账号2"><div class="caption">雇主品牌小红书账号</div></div>
+      <div class="media-card"><img src="{{IMG:luckin_work1}}" alt="五一前同事个性签名"><div class="caption"><a href="https://xhslink.cn/o/3PyJijlBMGX" target="_blank">五一前同事们的个性签名有种淡淡的疯感 →</a></div></div>
+      <div class="media-card"><img src="{{IMG:luckin_work2}}" alt="喝完的瑞幸千万别扔"><div class="caption"><a href="https://xhslink.cn/o/3Hm6kkqD9wq" target="_blank">喝完的瑞幸千万别扔！！涮涮还能用！！！→</a></div></div>
+    </div>
+  </div>
+
+  <!-- 青春杭商 -->
+  <div class="work-block">
+    <div class="work-block-header">
+      <h3>学校官方视频号：青春杭商</h3>
+      <p>在校期间参与运营的视频号内容</p>
+    </div>
+    <div class="img-grid cols-3">
+      <div class="media-card">
+        <img src="{{IMG:school_1}}" alt="毕业季MV">
+        <div class="caption"><a href="https://weixin.qq.com/sph/AfPRpTRRPN" target="_blank">毕业季MV《不说再见-杭商版》→</a></div>
+      </div>
+      <div class="media-card">
+        <img src="{{IMG:school_2}}" alt="音乐节快剪">
+        <div class="caption"><a href="https://weixin.qq.com/sph/AhMbK8SSH3" target="_blank">音乐节快剪视频 →</a></div>
+      </div>
+      <div class="media-card">
+        <img src="{{IMG:school_3}}" alt="抗疫主题宣传片">
+        <div class="caption"><a href="https://weixin.qq.com/sph/AGBa0D6k4Y" target="_blank">抗疫主题宣传片 →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AIGC ============ -->
+<section id="aigc">
+  <span class="section-label">03 / AIGC</span>
+  <h2 class="section-title">AIGC作品</h2>
+
+  <!-- 明信片 -->
+  <div class="work-block">
+    <div class="work-block-header">
+      <h3>字节跳动品牌展伴手礼 · AI创意明信片设计</h3>
+      <p>明信片主题为【选择字节的100个理由】，一套20张（含18张通用款 + 2张院校定制款）</p>
+    </div>
+    <div class="callout">
+      🧚‍♀️ 主导内容：
+      <ul>
+        <li>文案收集：来自学长学姐的寄语</li>
+        <li>设计画风，提供 prompt 与供应商协作生图</li>
+        <li>确定明信片样式与排版</li>
+        <li>后期线下推广 &amp; 线上传播</li>
+      </ul>
+    </div>
+    <h4 style="font-size:16px;font-weight:600;margin:24px 0 4px;">通用版</h4>
+    <div class="img-grid cols-6">
+      <img src="{{IMG:pc_g01}}" alt="明信片01"><img src="{{IMG:pc_g02}}" alt="明信片02"><img src="{{IMG:pc_g03}}" alt="明信片03"><img src="{{IMG:pc_g04}}" alt="明信片04"><img src="{{IMG:pc_g05}}" alt="明信片05"><img src="{{IMG:pc_g06}}" alt="明信片06">
+      <img src="{{IMG:pc_g07}}" alt="明信片07"><img src="{{IMG:pc_g08}}" alt="明信片08"><img src="{{IMG:pc_g09}}" alt="明信片09"><img src="{{IMG:pc_g10}}" alt="明信片10"><img src="{{IMG:pc_g11}}" alt="明信片11"><img src="{{IMG:pc_g12}}" alt="明信片12">
+      <img src="{{IMG:pc_g13}}" alt="明信片13"><img src="{{IMG:pc_g14}}" alt="明信片14"><img src="{{IMG:pc_g15}}" alt="明信片15"><img src="{{IMG:pc_g16}}" alt="明信片16"><img src="{{IMG:pc_g17}}" alt="明信片17"><img src="{{IMG:pc_g18}}" alt="明信片18">
+    </div>
+    <h4 style="font-size:16px;font-weight:600;margin:24px 0 4px;">C7+1 院校定制款</h4>
+    <div class="img-grid cols-6">
+      <img src="{{IMG:pc_s01}}" alt="院校定制01"><img src="{{IMG:pc_s02}}" alt="院校定制02"><img src="{{IMG:pc_s03}}" alt="院校定制03"><img src="{{IMG:pc_s04}}" alt="院校定制04"><img src="{{IMG:pc_s05}}" alt="院校定制05"><img src="{{IMG:pc_s06}}" alt="院校定制06">
+      <img src="{{IMG:pc_s07}}" alt="院校定制07"><img src="{{IMG:pc_s08}}" alt="院校定制08"><img src="{{IMG:pc_s09}}" alt="院校定制09"><img src="{{IMG:pc_s10}}" alt="院校定制10"><img src="{{IMG:pc_s11}}" alt="院校定制11"><img src="{{IMG:pc_s12}}" alt="院校定制12">
+      <img src="{{IMG:pc_s13}}" alt="院校定制13"><img src="{{IMG:pc_s14}}" alt="院校定制14"><img src="{{IMG:pc_s15}}" alt="院校定制15"><img src="{{IMG:pc_s16}}" alt="院校定制16"><img src="{{IMG:pc_s17}}" alt="院校定制17">
+    </div>
+    <h4 style="font-size:16px;font-weight:600;margin:24px 0 4px;">线上传播</h4>
+    <div class="split-layout">
+      <div class="media-card">
+        <p style="font-size:13px;font-weight:600;color:var(--text);">官号传播</p>
+        <img src="{{IMG:pc_official}}" alt="官号传播">
+      </div>
+      <div>
+        <p style="font-size:13px;font-weight:600;color:var(--text);margin-top:16px;">UGC自发分享</p>
+        <div class="carousel-wrap">
+          <div class="carousel">
+            <div class="slide"><img src="{{IMG:ugc_1}}" alt="UGC分享1"></div>
+            <div class="slide"><img src="{{IMG:ugc_2}}" alt="UGC分享2"></div>
+            <div class="slide"><img src="{{IMG:ugc_3}}" alt="UGC分享3"></div>
+            <div class="slide"><img src="{{IMG:ugc_4}}" alt="UGC分享4"></div>
+            <div class="slide"><img src="{{IMG:ugc_5}}" alt="UGC分享5"></div>
+          </div>
+          <div class="carousel-hint">← 向左滑动查看更多 →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 汽水音乐 -->
+  <div class="work-block">
+    <div class="work-block-header">
+      <h3>字节跳动品牌展 · 汽水音乐 AI 歌曲</h3>
+      <p>为推广字节跳动品牌展-汽水音乐展台的妙响AI写歌功能，以字节跳动招聘和字节范儿为选题制作的两首AI歌曲</p>
+    </div>
+    <div class="callout">🎵 两首 AI 歌曲作为现场样本</div>
+    <div class="img-grid cols-2">
+      <div class="media-card">
+        <p style="font-size:14px;font-weight:600;">《招聘君在吗！》</p>
+        <audio controls src="ai_music_1.mp3"></audio>
+      </div>
+      <div class="media-card">
+        <p style="font-size:14px;font-weight:600;">《管理理念原则》</p>
+        <audio controls src="ai_music_2.mp3"></audio>
+      </div>
+    </div>
+  </div>
+
+  <!-- 深渊镜 -->
+  <div class="work-block">
+    <div class="work-block-header">
+      <h3>字节跳动品牌展 · 线下打卡装置 · 深渊镜</h3>
+      <p>品牌展现场的情感收束与人才号召互动打卡装置</p>
+    </div>
+    <div class="img-grid cols-2">
+      <div class="media-card"><img src="{{IMG:abyss_1}}" alt="深渊镜1"></div>
+      <div class="media-card"><img src="{{IMG:abyss_2}}" alt="深渊镜2"></div>
+    </div>
+  </div>
+
+  <!-- AI海报 -->
+  <div class="work-block">
+    <div class="work-block-header">
+      <h3>字节品牌社媒传播物料 · AI海报</h3>
+      <p>为了传播字节跳动对实习生的培养，策划「你已进入字节，请选择你的 mentor」选题，利用 GPT 生成 AI 传播物料</p>
+    </div>
+    <div class="img-grid cols-4">
+      <img src="{{IMG:ai_poster_01}}" alt="AI海报01"><img src="{{IMG:ai_poster_02}}" alt="AI海报02"><img src="{{IMG:ai_poster_03}}" alt="AI海报03"><img src="{{IMG:ai_poster_04}}" alt="AI海报04">
+      <img src="{{IMG:ai_poster_05}}" alt="AI海报05"><img src="{{IMG:ai_poster_06}}" alt="AI海报06"><img src="{{IMG:ai_poster_07}}" alt="AI海报07"><img src="{{IMG:ai_poster_08}}" alt="AI海报08">
+    </div>
+  </div>
+</section>
+
+<!-- ============ EVENTS ============ -->
+<section id="events">
+  <span class="section-label">04 / EVENTS</span>
+  <h2 class="section-title">活动策划作品</h2>
+
+  <!-- C7 -->
+  <div class="work-block">
+    <div class="work-block-header">
+      <h3>字节跳动 C7 高校品牌传播活动</h3>
+      <p>面向校招候选人的线下品牌技术展</p>
+    </div>
+    <div class="media-card single">
+      <img src="{{IMG:c7_main}}" alt="C7品牌展">
+    </div>
+    <div class="callout">
+      🤓 活动背景：品牌技术展是「27校招品牌活动」的线下策展，面向校招候选人，用线下展陈的方式集中呈现字节跳动的<strong>产品矩阵、技术实力与雇主品牌主张</strong>。整体叙事采用「<strong>PAST（成长历程）→ NOW（当下能力）→ FUTURE（未来召唤）</strong>」的时间线结构。
+    </div>
+    <div class="event-table">
+      <div class="event-row">
+        <div class="stage">PAST<small>成长历程</small></div>
+        <div class="content"><strong>2012–2026 业务大事记 + 技术大事记时间轴</strong>，展示字节从 0 到 1 的成长轨迹和技术积累
+          <img src="{{IMG:c7_past}}" alt="时间轴海报"></div>
+      </div>
+      <div class="event-row">
+        <div class="stage">NOW<small>模型能力持续迭代进化</small></div>
+        <div class="content">Seed2.1、Seedance 2.5、Seedream 5.0 Pro、Seed Audio 1.0 等模型，直观感知字节 AI 模型家族的能力矩阵与持续进化
+          <img src="{{IMG:c7_now}}" alt="模型宣传"></div>
+      </div>
+      <div class="event-row">
+        <div class="stage">NOW<small>创造更好的生活体验</small></div>
+        <div class="content">汽水音乐妙响 AI 写歌 · 即梦 AI · PICO 4 Ultra · 抖音推荐算法，让候选人体验字节产品如何融入并改善日常生活
+          <div class="img-grid cols-3" style="margin-top:10px;">
+            <img src="{{IMG:c7_music}}" alt="汽水音乐"><img src="{{IMG:c7_jimeng}}" alt="即梦AI"><img src="{{IMG:c7_pico}}" alt="PICO">
+          </div></div>
+      </div>
+      <div class="event-row">
+        <div class="stage">NOW<small>释放更强的生产力</small></div>
+        <div class="content">豆包大模型 Seed2.1、豆包工作 Agent 产品，展示 AI 在办公与企业级场景的生产力价值</div>
+      </div>
+      <div class="event-row">
+        <div class="stage">NOW<small>推动 AI 加速科学发现</small></div>
+        <div class="content">PXDesign 蛋白设计、MCED 多癌种早筛、BAMBOO 电解液模型、ByteQC 量子化学软件，展现字节在前沿研究的投入与成果
+          <img src="{{IMG:c7_science}}" alt="科研展示"></div>
+      </div>
+      <div class="event-row">
+        <div class="stage">FUTURE<small>未来召唤</small></div>
+        <div class="content">深渊镜：情感收束与人才号召，形成互动打卡记忆点
+          <img src="{{IMG:c7_future}}" alt="深渊镜"></div>
+      </div>
+    </div>
+    <h4 style="font-size:16px;font-weight:600;margin:28px 0 8px;">工作内容二：UGC创作活动</h4>
+    <div class="callout">核心目的：提升品牌线下活动在线上的传播声量</div>
+    <div class="img-grid cols-2">
+      <div class="media-card"><p style="font-size:13px;font-weight:600;margin-bottom:8px;">高校KOL达人建联</p><img src="{{IMG:c7_kol}}" alt="KOL建联"></div>
+      <div class="media-card"><p style="font-size:13px;font-weight:600;margin-bottom:8px;">活动现场UGC引导</p><img src="{{IMG:c7_ugc}}" alt="UGC现场"></div>
+    </div>
+  </div>
+
+  <!-- 瑞幸 -->
+  <div class="work-block">
+    <div class="work-block-header">
+      <h3>瑞幸咖啡企业文化活动策划</h3>
+      <p>夏季运动会 · 储备店长交流会</p>
+    </div>
+    <h4 style="font-size:16px;font-weight:600;margin:8px 0;">夏季运动会</h4>
+    <div class="callout">
+      🏸 为了提升内部员工的凝聚力，策划夏季羽毛球大赛，负责：活动前期策划 &amp; 场地预定 &amp; 员工报名、活动执行 &amp; 现场引导。活动整体覆盖 <strong>200+</strong> 人。
+    </div>
+    <div class="img-grid cols-4">
+      <img src="{{IMG:sports_1}}" alt="运动会1"><img src="{{IMG:sports_2}}" alt="运动会2"><img src="{{IMG:sports_3}}" alt="运动会3"><img src="{{IMG:sports_4}}" alt="运动会4">
+    </div>
+    <h4 style="font-size:16px;font-weight:600;margin:28px 0 8px;">储备店长交流会</h4>
+    <div class="img-grid cols-3">
+      <div class="media-card"><img src="{{IMG:store_1}}" alt="储备店长1"></div>
+      <div class="media-card"><img src="{{IMG:store_2}}" alt="储备店长2"></div>
+      <div class="media-card"><img src="{{IMG:store_3}}" alt="储备店长3"></div>
+    </div>
+    <div class="media-card">
+      <p style="font-size:14px;color:var(--text-secondary);">📄 <a href="store_manager_news.docx" target="_blank">瑞幸咖啡杭州分公司2026届储备店长交流会新闻稿 →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section id="gallery">
+  <span class="section-label">05 / GALLERY</span>
+  <h2 class="section-title">手绘 &amp; 摄影作品</h2>
+  <h4 style="font-size:16px;font-weight:600;margin-bottom:12px;">平面手绘海报</h4>
+  <div class="img-grid cols-4">
+    <img src="{{IMG:hand_1}}" alt="手绘1"><img src="{{IMG:hand_2}}" alt="手绘2"><img src="{{IMG:hand_3}}" alt="手绘3"><img src="{{IMG:hand_4}}" alt="手绘4">
+  </div>
+  <h4 style="font-size:16px;font-weight:600;margin:32px 0 12px;">摄影作品</h4>
+  <div class="img-grid cols-4">
+    <img src="{{IMG:photo_1}}" alt="摄影1"><img src="{{IMG:photo_2}}" alt="摄影2"><img src="{{IMG:photo_3}}" alt="摄影3"><img src="{{IMG:photo_4}}" alt="摄影4">
+    <img src="{{IMG:photo_5}}" alt="摄影5"><img src="{{IMG:photo_6}}" alt="摄影6"><img src="{{IMG:photo_7}}" alt="摄影7"><img src="{{IMG:photo_8}}" alt="摄影8">
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 尤芷萱 · 个人作品集</p>
+</footer>
+
+</body>
+</html>
